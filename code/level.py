@@ -23,9 +23,9 @@ class Level:
 				x = col_index * TILESIZE
 				y = row_index * TILESIZE
 				if col == 'x':
-					Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
+					Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
 				if col == 'p':
-					self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
+					self.player = Player((x,y),[self.visible_sprites], self.obstacle_sprites)
 
 	def run(self):
 		# update and draw the game
@@ -45,10 +45,11 @@ class YSortCameraGroup(pygame.sprite.Group):
 
 	def custom_draw(self, player):
 
-		#getting the offset
+		# getting the offset
 		self.offset.x = player.rect.centerx - self.half_width
 		self.offset.y = player.rect.centery - self.half_height
 
-		for sprite in self.sprites():
+		# for sprite in self.sprites():
+		for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
 			offset_pos = sprite.rect.topleft - self.offset
 			self.display_surface.blit(sprite.image, offset_pos)
